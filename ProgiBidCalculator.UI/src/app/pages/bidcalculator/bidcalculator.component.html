@@ -1,0 +1,91 @@
+<div class="container mt-5">
+  <!-- Main Heading -->
+  <h4>Vehicle Bid Calculator</h4>
+
+  <!-- Form Section -->
+  <div class="formdetails col-lg-12 col-md-12">
+    <div class="row">
+      <!-- Left Column: Form -->
+      <div class="col-lg-5 col-md-5">
+        <form [formGroup]="calculationfrm">
+          <!-- Vehicle Base Price Input -->
+          <div class="col-lg-7 col-md-7">
+            <div class="m-4">
+              <label class="form-label">Vehicle Base Price<span class="errortext ms-1">*</span></label>
+              <input type="number" class="form-control" placeholder="Enter Vehicle Base Price" min="1" formControlName="vehicleBasePrice" [ngClass]="{'is-invalid': isSubmitted && f.vehicleBasePrice.errors}">
+              <!-- Error message for required validation -->
+              <div *ngIf="isSubmitted && f.vehicleBasePrice.errors" class="invalid-feedback">
+                <div *ngIf="f.vehicleBasePrice.errors.required">Please enter vehicle base price.</div>
+              </div>
+              <div *ngIf="isSubmitted && f.vehicleBasePrice.errors" class="invalid-feedback">
+                <div *ngIf="f.vehicleBasePrice.errors.min">Vehicle price must be greater than 0.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Vehicle Type Dropdown -->
+          <div class="col-lg-7 col-md-7">
+            <div class="m-4">
+              <label class="form-label">Vehicle Type<span class="errortext ms-1">*</span></label>
+              <select id="Type-id" name="Vehicle-type" class="form-select" formControlName="vehicleType" [ngClass]="{'is-invalid': isSubmitted && f.vehicleType.errors}">
+                <option value="">Select Vehicle Type</option>
+                <option value="common">Common</option>
+                <option value="luxury">Luxury</option>
+              </select>
+              <!-- Error message for required validation -->
+              <div *ngIf="isSubmitted && f.vehicleType.errors" class="invalid-feedback">
+                <div *ngIf="f.vehicleType.errors.required">Please select vehicle type.</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-7 col-md-7">
+            <div class="m-4">
+              <button class="btn btn-primary" (click)="getCalculationResponse()">Submit</button>
+              <!-- Error message for required validation -->
+              <div *ngIf="isSubmitted && f.vehicleType.errors" class="invalid-feedback">
+                <div *ngIf="f.vehicleType.errors.required">Please select vehicle type.</div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <!-- Right Column: Calculation Results -->
+      <div class="col-lg-7 col-md-7">
+        <div class="m-4"  *ngIf="calculationresp">
+          <div class="" style="margin-bottom:10px;">Based on the vehicle price and vehicle type, here is the cost calculation.</div>
+          <!-- Display Calculation Results in a Table -->
+          <table class="table" cellpadding="5" style="width:70%">
+            <colgroup>
+              <col style="width:100px" />
+              <col style="width:75px" />
+            </colgroup>
+            <tr>
+              <th>Vehicle Base Price</th>
+              <td align="right">${{calculationresp.vehicleBasePrice | decimalFormatter }}</td>
+            </tr>
+            <tr>
+              <th>Basic Fees</th>
+              <td align="right">${{calculationresp.basicFees | decimalFormatter }}</td>
+            </tr>
+            <tr>
+              <th>Special Fees</th>
+              <td align="right">${{calculationresp.specialFees | decimalFormatter }}</td>
+            </tr>
+            <tr>
+              <th>Association Fees</th>
+              <td align="right">${{calculationresp.associationFees | decimalFormatter  }}</td>
+            </tr>
+            <tr>
+              <th>Storage Fees</th>
+              <td align="right">${{calculationresp.storageFees | decimalFormatter }}</td>
+            </tr>
+            <tr>
+              <th>Total</th>
+              <th style="text-align:right">${{calculationresp.total | decimalFormatter }}</th>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+@ProgiBidCalculator_HostAddress = http://localhost:5228
+
+# GET {{ProgiBidCalculator_HostAddress}}/todos/
+# Accept: application/json
+
+###
+
+# GET {{ProgiBidCalculator_HostAddress}}/todos/1
+# Accept: application/json
+
+###
